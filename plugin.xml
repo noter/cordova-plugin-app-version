@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="uk.co.whiteoctober.cordova.AppVersion"
-    version="0.0.1">
+    version="0.1.2">
 
     <name>AppVersion</name>
     <description>
@@ -18,15 +18,15 @@
         <engine name="cordova" version=">=2.8.0" />
     </engines>
 
-    <js-module src="www/AppVersionPlugin.js">
-       <clobbers target="cordova.getAppVersion" />
-    </js-module>
+    <asset src="www/AppVersionPlugin.js" target="appversionplugin.js" />
 
     <!-- android -->
     <platform name="android">
 
-        <config-file target="res/xml/config.xml" parent="/*/plugins">
-            <plugin name="AppVersion" value="uk.co.whiteoctober.cordova.AppVersion" />
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="AppVersion">
+                <param name="android-package" value="uk.co.whiteoctober.cordova.AppVersion" />
+            </feature>
         </config-file>
 
         <source-file src="src/android/AppVersion.java" target-dir="src/uk/co/whiteoctober/cordova" />
@@ -34,10 +34,11 @@
 
     <!-- ios -->
     <platform name="ios">
-        <plugins-plist key="AppVersion" string="AppVersion" />
 
-        <config-file target="config.xml" parent="plugins">
-            <plugin name="AppVersion" value="AppVersion" />
+        <config-file target="config.xml" parent="/*">
+            <feature name="AppVersion">
+                <param name="ios-package" value="AppVersion" />
+            </feature>
         </config-file>
 
         <header-file src="src/ios/AppVersion.h" />
